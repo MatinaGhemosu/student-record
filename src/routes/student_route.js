@@ -1,19 +1,27 @@
-import { createStudent, deleteStudent, findStudentById, getStudents, updateStudent,getAllStudentsWithSelect,createStudentWithDepartment,sortStudents} from "../handlers/student_controller.js";
+// 
+
+import {
+  FindAllStudents,
+  findStudentById,
+  createStudent,
+  deleteStudent,
+  createStudentWithDepartment,
+  sortStudents,
+  updateStudent,
+  getAllStudentsWithSelect,
+} from "../handlers/student_controller.js";
+
 import { Router } from "express";
 
 let router = Router();
-router.get("/", getStudents);
 
-router.get("/:id", findStudentById);
-
+router.get("/", FindAllStudents);
+router.get("/single/:id", findStudentById);
 router.post("/", createStudent);
-
-router.post("/with-department", createStudentWithDepartment);
-
-router.put("/:id", updateStudent);
-router.get("/with-select",getAllStudentsWithSelect); 
 router.delete("/:id", deleteStudent);
-router.get("/sort",sortStudents);
-
+router.get("/sort", sortStudents);
+router.get("/with-select", getAllStudentsWithSelect);
+router.get("/with-depart", createStudentWithDepartment);
+router.put("/:id", updateStudent);
 
 export default router;

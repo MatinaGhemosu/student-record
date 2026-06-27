@@ -23,19 +23,17 @@ export const checkXRoleHeaderMiddleware = (req, res, next) => {
     next();
 }
 
- export let checkApiKeyInheader=(req,res,next)=>{
-let apiKey=req.headers["x-api-key"]
-if(!apiKey){
-    res.status(400).json({
-        error:"'api key not found in header"
-    })
-    return
-}
-if(apiKey !== "NodeJs-ApiKey"){
-    res.status(400).json({
-        error:"'api key not found in header"
-    })
-    return
-}
-next()
+export const checkApiKeyInHeader = (req, res, next) => {
+    const apiKey = req.headers["x-api-key"]
+    if (!apiKey) {
+        return res.status(400).json({
+            error: "API key not found in header"
+        })
+    }
+    if (apiKey !== "NodeJs-ApiKey") {
+        return res.status(400).json({
+            error: "API key is invalid"
+        })
+    }
+    next()
 }
